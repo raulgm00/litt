@@ -202,3 +202,20 @@ section.tunel{position:relative;padding:72px 0}
 /* Zoom reveal: la foto se abre desde un recorte al entrar (data-fx-zoom en la figura) */
 [data-fx-zoom] img{will-change:clip-path,transform}
 @media (prefers-reduced-motion:reduce){.desliza i{animation:none}.exp,.exp img,.exp__txt p{transition:none}}
+
+/* Tarjetas que salen hacia adelante (data-fx-profundidad, Cocula) */
+.prof-on{perspective:1200px;perspective-origin:50% 0%}
+.prof-on>*{transform-origin:50% 100%;will-change:transform,opacity}
+
+/* Parallax de la sierra (dos capas) y fila de la galería */
+.sierra path{will-change:transform}
+
+/* Cabeceras de sección: misma entrada en toda la página */
+.cab-js .cab{opacity:0;transform:translateY(26px);filter:blur(6px);
+  transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .8s}
+.cab-js .cab-2{transition-delay:.09s}
+.cab-js .cab-vista .cab{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.cab-js .cab{opacity:1;transform:none;filter:none;transition:none}}
+
+/* Hero estilo Toucan (propuesta): el sujeto vive a la derecha; en móvil no se corta */
+.hero-foto--der img,.hero-foto--der video{object-position:84% 50%}

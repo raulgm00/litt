@@ -18,6 +18,8 @@
     var ahorro = navigator.connection && navigator.connection.saveData;
     if (QUIETO || ahorro) { v.remove(); return; }
     v.addEventListener("canplay", function () { v.classList.add("listo"); v.play().catch(function () {}); }, { once: true });
+    // Estilo Toucan: se reproduce una vez y se funde con la foto de abajo, que es su último cuadro en alta resolución
+    if (v.hasAttribute("data-una-vez")) v.addEventListener("ended", function () { v.classList.remove("listo"); }, { once: true });
     v.addEventListener("error", function () { v.remove(); }, { once: true });
     v.src = v.getAttribute("data-src") || "img/hero-loop.mp4";
   });
@@ -210,6 +212,74 @@
     }
     addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
     addEventListener("resize", pintar); pintar();
+  });
+
+  // Tarjetas que salen hacia adelante: cada una viaja desde el fondo (Z) mientras la rejilla cruza la pantalla.
+  // Mismo lenguaje que el túnel, pero sin fijar la sección. Escalonado por columna.
+  seguro("profundidad", function () {
+    if (QUIETO) return;
+    var items = [], raf = 0;
+    [].forEach.call(document.querySelectorAll("[data-fx-profundidad]"), function (g) {
+      g.classList.add("prof-on");
+      [].forEach.call(g.children, function (c) { items.push({ c: c, g: g, col: 0, dy: 0 }); });
+    });
+    if (!items.length) return;
+    function medir() {
+      var fila = {};
+      items.forEach(function (d) {
+        d.dy = d.c.offsetTop - d.g.offsetTop;
+        var k = d.g.dataset.fxId || (d.g.dataset.fxId = Math.random().toString(36).slice(2)), clave = k + ":" + d.dy;
+        d.col = fila[clave] = (fila[clave] === undefined ? 0 : fila[clave] + 1);
+      });
+      pintar();
+    }
+    function pintar() {
+      raf = 0; var H = innerHeight;
+      items.forEach(function (d) {
+        var top = d.g.getBoundingClientRect().top + d.dy;
+        if (top > H * 1.2 || top < -H) return;
+        var p = lim((H * .98 - top) / (H * .42) - d.col * .14, 0, 1), e = 1 - Math.pow(1 - p, 3), q = 1 - e;
+        d.c.style.transform = "translate3d(0," + (q * 70).toFixed(1) + "px," + (-q * 360).toFixed(1) + "px) rotateX(" + (q * 16).toFixed(2) + "deg)";
+        d.c.style.opacity = (.12 + .88 * e).toFixed(3);
+      });
+    }
+    addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
+    addEventListener("resize", medir); addEventListener("load", medir); medir();
+  });
+
+  // Parallax: la sierra del fondo en dos capas (la cercana se hunde más que la lejana)
+  // y la galería como fila con velocidades distintas por columna (usa `translate`, no choca con la cascada ni el zoom)
+  seguro("parallax", function () {
+    if (QUIETO) return;
+    var capas = [].slice.call(document.querySelectorAll(".sierra path")),
+      figs = [].slice.call(document.querySelectorAll(".galeria .foto")), vel = [.07, -.05, .07], raf = 0;
+    function pintar() {
+      raf = 0; var H = innerHeight, doc = document.documentElement, ancho = doc.clientWidth >= 760;
+      var p = lim(scrollY / Math.max(1, doc.scrollHeight - H), 0, 1);
+      if (capas[0]) capas[0].style.transform = "translateY(" + (p * 26).toFixed(1) + "px)";
+      if (capas[1]) capas[1].style.transform = "translateY(" + (p * 58).toFixed(1) + "px)";
+      figs.forEach(function (f, i) {
+        if (!ancho) { f.style.translate = ""; return; }
+        var r = f.parentNode.getBoundingClientRect(); if (r.top > H || r.bottom < 0) return;
+        var c = (r.top + r.height / 2 - H / 2);
+        f.style.translate = "0 " + (c * vel[i % 3]).toFixed(1) + "px";
+      });
+    }
+    addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
+    addEventListener("resize", pintar); pintar();
+  });
+
+  // Cabeceras de sección: misma entrada en toda la página (sube desde abajo y se enfoca)
+  seguro("cabeceras", function () {
+    if (QUIETO || !("IntersectionObserver" in window)) return;
+    var secs = [].slice.call(document.querySelectorAll("main section:not(.hero):not(.tunel):not(.h-tl)"));
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("cab-vista"); io.unobserve(e.target); } }); }, { threshold: .12 });
+    secs.forEach(function (s) {
+      var eb = s.querySelector(".eyebrow"); if (!eb) return;
+      eb.classList.add("cab"); var h = eb.nextElementSibling; if (h && /^H2$/.test(h.tagName)) h.classList.add("cab", "cab-2");
+      if (s.getBoundingClientRect().top < innerHeight) s.classList.add("cab-vista"); else io.observe(s);
+    });
+    document.documentElement.classList.add("cab-js");
   });
 
   // Cascada al entrar cada bloque .revela en pantalla (una sola vez)
