@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="sin-tl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/efectos.css">
 <link rel="stylesheet" href="assets/litt.css">
+<link rel="stylesheet" href="assets/litt-fx.css">
 </head>
 <body>
 <div class="cielo" aria-hidden="true"></div>
@@ -121,54 +122,48 @@
     </div>
   </section>
 
-  <!-- MÉTODO -->
-  <section id="metodo">
-    <div class="envoltura">
-      <span class="eyebrow">Método del piloto</span>
-      <h2>Cuatro fases: <span class="acento">participación primero</span>, IA como apoyo</h2>
-      <p class="lead">Se basa en métodos probados de planeación turística participativa (diagnóstico, mapeo de actores, vocación e inventario con fichas validadas por residentes) y les suma una capa de datos.</p>
-      <div class="rejilla r4 fases revela" data-fx="spot" style="margin-top:32px">
-        <article class="tarjeta fase fx-spot-item fx-item">
-          <span class="num">Fase 1</span>
-          <h3 style="margin-top:8px">Inventario vivo</h3>
-          <p>Fichas de activos materiales e inmateriales: atractivos, oficios, gastronomía, fiestas y paisaje, levantadas en recorridos y talleres.</p>
-          <div class="ia"><strong>Datos:</strong> precarga desde fuentes abiertas y una ficha digital que la propia comunidad corrige.</div>
-        </article>
-        <article class="tarjeta fase fx-spot-item fx-item">
-          <span class="num">Fase 2</span>
-          <h3 style="margin-top:8px">Escucha del visitante</h3>
-          <p>Qué dicen, qué valoran y qué echan de menos quienes ya visitan el territorio.</p>
-          <div class="ia"><strong>IA:</strong> análisis de reseñas públicas y redes por sentimiento y temas, como en los casos de Las Palmas, Torrevieja e Isparta.</div>
-        </article>
-        <article class="tarjeta fase fx-spot-item fx-item">
-          <span class="num">Fase 3</span>
-          <h3 style="margin-top:8px">Mesas de las cinco hélices</h3>
-          <p>Los actores validan, priorizan y definen la vocación: qué hace único al territorio y hacia dónde crecer.</p>
-          <div class="ia"><strong>Datos:</strong> un tablero compartido con el inventario y la escucha, para decidir con evidencia.</div>
-        </article>
-        <article class="tarjeta fase fx-spot-item fx-item">
-          <span class="num">Fase 4</span>
-          <h3 style="margin-top:8px">Identidad fundamentada</h3>
-          <p>El documento de identidad turística territorial y el mapa de su cadena de valor.</p>
-          <div class="ia"><strong>IA:</strong> un asistente del territorio que responde solo con el conocimiento validado por la comunidad.</div>
-        </article>
+  <!-- MÉTODO · timeline horizontal fijado (web-premium sección E · receta ISSSTE IX:266) -->
+  <section class="h-tl" id="metodo" aria-labelledby="metodoTit">
+    <div class="tl-sticky">
+      <div class="envoltura tl-head">
+        <div>
+          <span class="eyebrow">Método del piloto</span>
+          <h2 id="metodoTit">Cuatro fases: <span class="acento">participación primero</span>, IA como apoyo</h2>
+          <p class="lead">Métodos probados de planeación turística participativa, con una capa de datos encima.</p>
+        </div>
+        <span class="tl-cnt" aria-hidden="true">FASE <b>01</b> / 04</span>
       </div>
+      <div class="tl-view">
+        <ol class="tl-track">
+          <li class="tl-line" aria-hidden="true"><i></i></li>
+          <li class="tl-hito up"><span class="tl-dot"></span><span class="tl-stem"></span><div class="tl-txt"><span class="tl-n">FASE 1</span><h3>Inventario vivo</h3><p>Fichas de atractivos, oficios, gastronomía, fiestas y paisaje, levantadas en recorridos y talleres.</p><code>Datos: precarga + ficha que la comunidad corrige</code></div></li>
+          <li class="tl-hito dn"><span class="tl-dot"></span><span class="tl-stem"></span><div class="tl-txt"><span class="tl-n">FASE 2</span><h3>Escucha del visitante</h3><p>Qué dicen, qué valoran y qué echan de menos quienes ya visitan el territorio.</p><code>IA: reseñas y redes por sentimiento y tema</code></div></li>
+          <li class="tl-hito up"><span class="tl-dot"></span><span class="tl-stem"></span><div class="tl-txt"><span class="tl-n">FASE 3</span><h3>Mesas de las cinco hélices</h3><p>Los actores validan, priorizan y definen la vocación del territorio.</p><code>Datos: tablero compartido para decidir</code></div></li>
+          <li class="tl-hito dn"><span class="tl-dot"></span><span class="tl-stem"></span><div class="tl-txt"><span class="tl-n">FASE 4</span><h3>Identidad fundamentada</h3><p>El documento de identidad turística territorial y el mapa de su cadena de valor.</p><code class="ok">IA: asistente con el conocimiento validado</code></div></li>
+        </ol>
+      </div>
+      <p class="fuente envoltura tl-nota">Inspirado en la guía de planeación turística local de MINCETUR y en inventarios participativos validados por residentes.</p>
     </div>
   </section>
 
-  <!-- HÉLICES -->
-  <section id="helices">
-    <div class="envoltura">
-      <span class="eyebrow">Modelo de cinco hélices</span>
-      <h2>Quién pone qué en Cocula</h2>
-      <p class="lead">El modelo de quíntuple hélice suma el medio ambiente a academia, gobierno, empresa y sociedad: la sostenibilidad se vuelve motor de innovación, no una restricción.</p>
-      <div class="rejilla r5 revela" style="margin-top:32px">
-        <article class="tarjeta helice fx-item"><div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><h3>Academia</h3><ul><li>Investigación y método</li><li>Estudiantes en campo</li></ul></article>
-        <article class="tarjeta helice fx-item"><div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M12 3 3 9h18z"/></svg></div><h3>Gobierno</h3><ul><li>Plan municipal y reglas</li><li>Infraestructura y promoción</li></ul></article>
-        <article class="tarjeta helice fx-item"><div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2-5H5z"/><path d="M5 9v11h14V9M9 20v-6h6v6"/></svg></div><h3>Empresa</h3><ul><li>Birrierías, hoteles, artesanos</li><li>Cadena de valor</li></ul></article>
-        <article class="tarjeta helice fx-item"><div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></div><h3>Sociedad civil</h3><ul><li>Mariachis y cofradías</li><li>Tradición y memoria</li></ul></article>
-        <article class="tarjeta helice fx-item"><div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 9 9l4 6 3-4 5 9z"/><circle cx="17" cy="5" r="2"/></svg></div><h3>Medio ambiente</h3><ul><li>Presa Casa Blanca</li><li>Sierra y Cerro de la Cruz</li></ul></article>
+  <!-- HÉLICES · túnel de perspectiva (receta RuflesTv XU:1599) -->
+  <section class="tunel" id="helices" aria-labelledby="helicesTit">
+    <div class="tunel__pin">
+      <span class="tunel__aro tunel__aro--1" aria-hidden="true"></span>
+      <span class="tunel__aro tunel__aro--2" aria-hidden="true"></span>
+      <div class="tunel__titulo">
+        <span class="eyebrow">Modelo de cinco hélices</span>
+        <h2 id="helicesTit">Quién pone qué <span class="acento">en Cocula</span></h2>
+        <p class="sub">La quíntuple hélice suma el medio ambiente: la sostenibilidad se vuelve motor de innovación, no una restricción.</p>
       </div>
+      <ul class="tunel__cards">
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><h3>Academia</h3><p>Investigación, método y estudiantes en campo.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M12 3 3 9h18z"/></svg></span><h3>Gobierno</h3><p>Plan municipal, reglas, infraestructura y promoción.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-2-5H5z"/><path d="M5 9v11h14V9M9 20v-6h6v6"/></svg></span><h3>Empresa</h3><p>Birrierías, hoteles y artesanos: la cadena de valor.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></span><h3>Sociedad civil</h3><p>Mariachis, cofradías, tradición y memoria.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20 9 9l4 6 3-4 5 9z"/><circle cx="17" cy="5" r="2"/></svg></span><h3>Medio ambiente</h3><p>Presa Casa Blanca, la sierra y el Cerro de la Cruz.</p></li>
+        <li class="tcard tcard--meta"><span class="big">=</span><h3>Identidad fundamentada</h3><p>Construida con los actores locales, como base para estrategias de desarrollo.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -185,27 +180,51 @@
     </div>
   </section>
 
-  <!-- JUNTOS -->
+  <!-- JUNTOS · carpeta de vidrio (receta RuflesTv «Kit de redes») -->
   <section id="juntos">
-    <div class="envoltura">
-      <div class="cta fx-borde-giro">
-        <div>
-          <span class="eyebrow">Trabajar juntos</span>
-          <h2>LITT pone el territorio. WeSoft pone la tecnología.</h2>
-          <p class="lead">LITT conduce la metodología territorial, la relación con los actores y el financiamiento. WeSoft construye y opera la plataforma, el análisis de datos y la IA. El modelo queda listo para replicarse en otras comunidades, cada una con su propia identidad.</p>
+    <div class="envoltura hoy-sec">
+      <div>
+        <span class="eyebrow">Trabajar juntos</span>
+        <h2>LITT pone el territorio. <span class="acento">WeSoft pone la tecnología.</span></h2>
+        <p class="lead">LITT conduce la metodología territorial, la relación con los actores y el financiamiento. WeSoft construye y opera la plataforma, el análisis de datos y la IA.</p>
+        <p class="hoy-txt">El modelo queda listo para replicarse en otras comunidades, cada una con su propia identidad.</p>
+        <div class="acciones" style="margin-top:0">
+          <a class="btn btn-oro" href="https://wesoft.solutions" rel="noopener">Conocer WeSoft</a>
+          <a class="btn btn-vidrio" href="index.html">← Qué es LITT</a>
         </div>
-        <div>
-          <h3>Siguiente paso</h3>
-          <ol class="pasos">
-            <li>Una llamada de 30 minutos para definir el alcance del piloto.</li>
-            <li>Un acuerdo sencillo: roles, propiedad de los datos y qué pasa si funciona.</li>
-            <li>Arrancar la Fase 1 con un inventario semilla de Cocula.</li>
-          </ol>
-          <div class="acciones"><a class="btn btn-oro" href="https://wesoft.solutions" rel="noopener">Conocer WeSoft</a></div>
+      </div>
+      <div class="gf__zona">
+        <div class="gf" id="juntosGf" data-open data-nombre="el siguiente paso, 3 pasos">
+          <div class="gf__tilt">
+            <div class="gf__sombra" aria-hidden="true"></div>
+            <div class="gf__back" aria-hidden="true"></div>
+            <svg class="gf__rim gf__rim--back" viewBox="0 0 340 272" aria-hidden="true"><path d="M0 56A22 22 0 0 1 22 34L146 34C170 34 172 0 198 0L318 0A22 22 0 0 1 340 22L340 250A22 22 0 0 1 318 272L22 272A22 22 0 0 1 0 250Z"/></svg>
+            <div class="gf__hojas" role="list" aria-label="Los tres pasos siguientes">
+              <article class="gf__hoja" role="listitem" style="--slot:-1;--d:2">
+                <span class="hj-n">01</span><h3>Una llamada</h3><p>30 minutos para definir el alcance del piloto.</p>
+              </article>
+              <article class="gf__hoja" role="listitem" style="--slot:0;--d:1">
+                <span class="hj-n">02</span><h3>Un acuerdo sencillo</h3><p>Roles, propiedad de los datos y qué pasa si funciona.</p>
+              </article>
+              <article class="gf__hoja" role="listitem" style="--slot:1;--d:0">
+                <span class="hj-n">03</span><h3>Arrancar la Fase 1</h3><p>Un inventario semilla de Cocula.</p>
+              </article>
+            </div>
+            <div class="gf__front">
+              <div class="gf__tint" aria-hidden="true"></div>
+              <div class="gf__spec" aria-hidden="true"></div>
+              <svg class="gf__rim gf__rim--front" viewBox="0 0 340 198" aria-hidden="true"><defs><linearGradient id="gf-rim-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".35" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient></defs><path d="M0 22A22 22 0 0 1 22 0L118 0C144 0 146 32 172 32L318 32A22 22 0 0 1 340 54L340 176A22 22 0 0 1 318 198L22 198A22 22 0 0 1 0 176Z" stroke="url(#gf-rim-g)"/></svg>
+              <button type="button" class="gf__hit" aria-expanded="true" aria-label="Cerrar el siguiente paso, 3 pasos"></button>
+              <div class="gf__label"><span class="gf__titulo">Siguiente paso</span><span class="gf__meta">3 pasos para empezar</span></div>
+              <span class="gf__icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </div>
+          </div>
         </div>
+        <p class="gf__ayuda">Toca la carpeta para abrirla.</p>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer>
@@ -225,24 +244,6 @@
 </footer>
 
 <script src="assets/efectos.js"></script>
-<script>
-// Video de fondo del hero: solo si no hay reduced-motion ni ahorro de datos; si falla, queda la foto
-(function(){
-  var v=document.getElementById('heroVideo'); if(!v) return;
-  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ahorro=navigator.connection&&navigator.connection.saveData;
-  if(quieto||ahorro){v.remove();return;}
-  v.addEventListener('canplay',function(){v.classList.add('listo');v.play().catch(function(){});},{once:true});
-  v.addEventListener('error',function(){v.remove();},{once:true});
-  v.src='img/hero-loop.mp4';
-})();
-// Cascada al entrar cada bloque en pantalla (una sola vez)
-(function(){
-  var bloques=[].slice.call(document.querySelectorAll('.revela'));
-  if(!('IntersectionObserver' in window)||!window.Fx){return;}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Fx.entrada(e.target,'.fx-item');io.unobserve(e.target);}});},{threshold:.2});
-  bloques.forEach(function(b){io.observe(b);});
-})();
-</script>
+<script src="assets/litt-fx.js"></script>
 </body>
 </html>
