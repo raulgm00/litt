@@ -152,3 +152,53 @@ section.tunel{position:relative;padding:72px 0}
 .estado li{margin:8px 0;color:var(--ink-2)}
 .estado li strong{color:var(--ink)}
 .aviso{margin-top:10px;padding:12px 14px;border-radius:12px;border:1px dashed rgba(239,192,97,.35);color:var(--ink-2);font-size:14px}
+
+/* =====================================================================
+   Primeras secciones de la propuesta (ideas de Scrolltide re-implementadas en vanilla)
+   ===================================================================== */
+/* Titular palabra por palabra: desenfoque → nítido (data-fx-palabras) */
+.fx-palabra{display:inline-block;white-space:pre}
+.fx-palabras-on .fx-palabra{opacity:0;filter:blur(10px);transform:translateY(.35em);animation:fx-palabra .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--w) * 70ms + 150ms)}
+@keyframes fx-palabra{to{opacity:1;filter:blur(0);transform:none}}
+.hero h1 .acento-serif{font-style:italic;font-weight:500}
+/* Portada que se vuelve marco de cine al hacer scroll (data-fx-cine en .hero) */
+.hero[data-fx-cine] .hero-foto{will-change:clip-path,transform}
+.hero[data-fx-cine] .hero-texto{will-change:transform,opacity}
+.desliza{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-2);font:600 11px/1 Inter;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+.desliza i{width:1px;height:38px;background:linear-gradient(var(--oro),transparent);animation:fx-desliza 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes fx-desliza{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@media (max-width:760px){.desliza{display:none}}
+
+/* Expanded Cards: la tarjeta activa crece y muestra su texto */
+.expandir{display:flex;gap:14px;height:min(520px,70vh);margin-top:32px}
+.exp{position:relative;flex:1;min-width:0;border-radius:22px;overflow:hidden;cursor:pointer;border:1px solid rgba(239,192,97,.18);background:#140f0b;
+  transition:flex .7s cubic-bezier(.2,.8,.2,1),border-color .4s}
+.exp.activa{flex:2.6;border-color:rgba(239,192,97,.5)}
+.exp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter .7s}
+.exp:not(.activa) img{filter:saturate(.6) brightness(.7)}
+.exp.activa img{transform:scale(1)}
+.exp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,8,.05) 30%,rgba(13,10,8,.88) 78%,rgba(13,10,8,.97))}
+.exp__txt{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:26px}
+.exp__txt .num{display:block;margin-bottom:8px}
+.exp__txt h3{font-size:clamp(1.15rem,1.8vw,1.55rem);text-wrap:balance}
+.exp__txt p{color:var(--ink-2);margin:.5em 0 0;max-width:46ch;opacity:0;transform:translateY(10px);transition:opacity .5s .15s,transform .6s .15s}
+.exp.activa .exp__txt p{opacity:1;transform:none}
+.exp:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+@media (max-width:760px){
+  .expandir{flex-direction:column;height:auto}
+  .exp,.exp.activa{flex:none;height:300px}
+  .exp__txt h3{white-space:normal}
+  .exp__txt p{opacity:1;transform:none}
+  .exp:not(.activa) img{filter:none}
+}
+
+/* Texto que se ilumina palabra por palabra con el scroll (data-fx-leer) */
+.leer{font:500 clamp(1.45rem,3vw,2.3rem)/1.3 Fraunces,Georgia,serif;color:var(--ink);max-width:28ch;margin:22px 0 0}
+.leer .fx-w{transition:opacity .25s,color .25s}
+.leer-on .fx-w{opacity:.2}
+.leer-on .fx-w.on{opacity:1}
+.leer .fx-w.dest{color:var(--oro)}
+
+/* Zoom reveal: la foto se abre desde un recorte al entrar (data-fx-zoom en la figura) */
+[data-fx-zoom] img{will-change:clip-path,transform}
+@media (prefers-reduced-motion:reduce){.desliza i{animation:none}.exp,.exp img,.exp__txt p{transition:none}}

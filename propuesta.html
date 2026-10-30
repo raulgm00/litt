@@ -35,7 +35,7 @@
 
 <main id="inicio">
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" data-fx-cine>
     <div class="hero-foto" aria-hidden="true">
       <video id="heroVideo" autoplay muted loop playsinline preload="none" poster="img/hero.webp"></video>
       <img src="img/hero.webp" alt="" width="1920" height="1080">
@@ -43,7 +43,7 @@
     <div class="envoltura hero-grid">
       <div class="hero-texto">
         <span class="eyebrow">Propuesta de piloto · Identidad turística territorial</span>
-        <h1>Lo que hace único a un territorio, <span class="acento">construido con su gente</span> y leído con datos.</h1>
+        <h1 data-fx-palabras>Lo que hace único a un territorio, <span class="acento acento-serif">construido con su gente</span> y leído con datos.</h1>
         <p class="lead">Una propuesta de WeSoft para LITT: inventariar los activos de la comunidad, escuchar a sus visitantes con IA y validar todo con las cinco hélices, hasta llegar a una identidad turística fundamentada. Territorio de referencia: Cocula, Jalisco.</p>
         <div class="acciones">
           <a class="btn btn-oro" href="#juntos">Ver cómo trabajaríamos juntos</a>
@@ -51,6 +51,7 @@
         </div>
       </div>
     </div>
+    <a class="desliza" href="#reto">Desliza<i aria-hidden="true"></i></a>
     <p class="credito-ia">Imagen ilustrativa generada con IA</p>
   </section>
 
@@ -62,22 +63,19 @@
         <figcaption>Objetivo del piloto de LITT · Laboratorio de Innovación Turística Territorial</figcaption>
       </figure>
       <span class="eyebrow">El reto</span>
-      <h2>Tres cosas que LITT quiere lograr</h2>
-      <div class="rejilla r3 revela" data-fx="spot" style="margin-top:32px">
-        <article class="tarjeta fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <h3>Identidad del territorio</h3>
-          <p>Reconocer sus activos, su vocación, sus capacidades y aquello que lo hace único.</p>
+      <h2>Tres cosas que <span class="acento">LITT quiere lograr</span></h2>
+      <div class="expandir revela">
+        <article class="exp activa fx-item" tabindex="0" aria-expanded="true">
+          <img src="img/reto-identidad.webp" alt="Manos de un mariachi tocando la guitarra con traje de charro" loading="lazy" width="820" height="1025">
+          <div class="exp__txt"><span class="num">01</span><h3>Identidad del territorio</h3><p>Reconocer sus activos, su vocación, sus capacidades y aquello que lo hace único.</p></div>
         </article>
-        <article class="tarjeta fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M10.5 7.5 6.5 14.5M13.5 7.5l4 7M8 17h8"/></svg></div>
-          <h3>Cinco hélices articuladas</h3>
-          <p>Academia, gobierno, empresa, sociedad civil y medio ambiente trabajando sobre la misma base.</p>
+        <article class="exp fx-item" tabindex="0" aria-expanded="false">
+          <img src="img/reto-helices.webp" alt="Manos de varias personas colocan chinchetas y notas sobre un mapa del pueblo" loading="lazy" width="900" height="1126">
+          <div class="exp__txt"><span class="num">02</span><h3>Cinco hélices articuladas</h3><p>Academia, gobierno, empresa, sociedad civil y medio ambiente trabajando sobre la misma base.</p></div>
         </article>
-        <article class="tarjeta fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
-          <h3>Datos que deciden</h3>
-          <p>Entender la cadena de valor turística y convertir la información en decisiones y oportunidades.</p>
+        <article class="exp fx-item" tabindex="0" aria-expanded="false">
+          <img src="img/reto-datos.webp" alt="Plaza de un pueblo colonial al atardecer" loading="lazy" width="1920" height="1080">
+          <div class="exp__txt"><span class="num">03</span><h3>Datos que deciden</h3><p>Entender la cadena de valor turística y convertir la información en decisiones y oportunidades.</p></div>
         </article>
       </div>
     </div>
@@ -88,7 +86,7 @@
     <div class="envoltura">
       <span class="eyebrow">Territorio de referencia</span>
       <h2>Cocula ya tiene identidad; falta <span class="acento">fundamentarla y articularla</span></h2>
-      <p class="lead">El Plan Municipal 2025–2027 pide un Plan de Desarrollo Turístico participativo que defina vocaciones territoriales y rutas prioritarias. El piloto de LITT responde justo a eso.</p>
+      <p class="leer" data-fx-leer data-destacar="piloto|LITT">El Plan Municipal 2025–2027 pide un Plan de Desarrollo Turístico participativo que defina vocaciones territoriales y rutas prioritarias. El piloto de LITT responde justo a eso.</p>
       <div class="rejilla r4 revela" data-fx="spot" style="margin-top:32px">
         <div class="tarjeta cifra fx-spot-item fx-item"><b>2023</b><p>Año en que Cocula fue nombrado Pueblo Mágico.</p><span class="fuente">El Economista, oct-2025</span></div>
         <div class="tarjeta cifra fx-spot-item fx-item"><b>+<span data-fx-contador>20</span><small>%</small></b><p>Crecimiento de la afluencia turística tras el nombramiento.</p><span class="fuente">El Economista, oct-2025</span></div>
@@ -114,9 +112,9 @@
       <span class="eyebrow">Lo que se inventaría</span>
       <h2>Oficios, paisaje y comunidad: <span class="acento">la identidad no está solo en el mariachi</span></h2>
       <div class="galeria revela" style="margin-top:32px">
-        <figure class="foto fx-item"><img src="img/oficios.webp" alt="Manos de un artesano trabajando la madera en su taller" loading="lazy" width="900" height="506"><figcaption><b>Oficios</b><span>Quién hace qué, con qué técnica y para quién: la cadena de valor empieza en el taller.</span></figcaption></figure>
-        <figure class="foto fx-item"><img src="img/paisaje.webp" alt="Presa rodeada de cerros verdes al amanecer, con niebla sobre el agua" loading="lazy" width="900" height="506"><figcaption><b>Paisaje</b><span>El capital natural es la quinta hélice: presa, sierra y miradores también son identidad.</span></figcaption></figure>
-        <figure class="foto fx-item"><img src="img/comunidad.webp" alt="Vecinos de distintas edades revisan un mapa con notas en una mesa de trabajo" loading="lazy" width="900" height="506"><figcaption><b>Comunidad</b><span>Las mesas con actores locales validan el inventario y deciden qué hace único al territorio.</span></figcaption></figure>
+        <figure class="foto fx-item" data-fx-zoom><img src="img/oficios.webp" alt="Manos de un artesano trabajando la madera en su taller" loading="lazy" width="900" height="506"><figcaption><b>Oficios</b><span>Quién hace qué, con qué técnica y para quién: la cadena de valor empieza en el taller.</span></figcaption></figure>
+        <figure class="foto fx-item" data-fx-zoom><img src="img/paisaje.webp" alt="Presa rodeada de cerros verdes al amanecer, con niebla sobre el agua" loading="lazy" width="900" height="506"><figcaption><b>Paisaje</b><span>El capital natural es la quinta hélice: presa, sierra y miradores también son identidad.</span></figcaption></figure>
+        <figure class="foto fx-item" data-fx-zoom><img src="img/comunidad.webp" alt="Vecinos de distintas edades revisan un mapa con notas en una mesa de trabajo" loading="lazy" width="900" height="506"><figcaption><b>Comunidad</b><span>Las mesas con actores locales validan el inventario y deciden qué hace único al territorio.</span></figcaption></figure>
       </div>
       <p class="fuente" style="margin-top:14px">Imágenes ilustrativas generadas con IA; no corresponden a lugares ni personas reales de Cocula.</p>
     </div>

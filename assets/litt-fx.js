@@ -113,6 +113,105 @@
     });
   });
 
+  // Parte un texto en palabras (conserva los <span class="acento"> y sus clases en cada palabra)
+  function partir(el, clase) {
+    var i = 0, frag = document.createDocumentFragment();
+    [].slice.call(el.childNodes).forEach(function (nodo) {
+      var cls = nodo.nodeType === 1 ? nodo.className : "", txt = nodo.textContent;
+      txt.split(/(\s+)/).forEach(function (t) {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+        var s = document.createElement("span"); s.className = clase + (cls ? " " + cls : ""); s.textContent = t;
+        s.setAttribute("data-w", i); s.style.setProperty("--w", i++); frag.appendChild(s);
+      });
+    });
+    el.textContent = ""; el.appendChild(frag); return i;
+  }
+
+  // Titular que entra palabra por palabra (desenfoque → nítido)
+  seguro("palabras", function () {
+    if (QUIETO) return;
+    [].forEach.call(document.querySelectorAll("[data-fx-palabras]"), function (el) {
+      el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
+      partir(el, "fx-palabra"); el.classList.add("fx-palabras-on");
+      [].forEach.call(el.children, function (c) { c.setAttribute("aria-hidden", "true"); });
+    });
+  });
+
+  // Portada que se vuelve marco de cine: la foto se recorta con esquinas redondas y el texto sube
+  seguro("cine", function () {
+    if (QUIETO) return;
+    [].forEach.call(document.querySelectorAll(".hero[data-fx-cine]"), function (hero) {
+      var foto = hero.querySelector(".hero-foto"), txt = hero.querySelector(".hero-texto"), raf = 0;
+      function pintar() {
+        raf = 0;
+        var r = hero.getBoundingClientRect(), H = innerHeight;
+        if (r.bottom < 0) return;
+        var p = lim(-r.top / (H * .75), 0, 1), e = p * p * (3 - 2 * p);
+        var lado = (e * 5).toFixed(2), abajo = (e * 10).toFixed(2), rad = Math.round(e * 28);
+        foto.style.clipPath = "inset(" + (e * 3).toFixed(2) + "% " + lado + "% " + abajo + "% " + lado + "% round " + rad + "px)";
+        foto.style.transform = "scale(" + (1 + e * .06).toFixed(4) + ")";
+        txt.style.transform = "translateY(" + (-e * 60).toFixed(1) + "px)";
+        txt.style.opacity = (1 - e * .85).toFixed(3);
+      }
+      addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
+      pintar();
+    });
+  });
+
+  // Expanded Cards: la activa crece; se activa con el mouse, el foco o un toque
+  seguro("expandir", function () {
+    [].forEach.call(document.querySelectorAll(".expandir"), function (grupo) {
+      var cs = [].slice.call(grupo.querySelectorAll(".exp"));
+      function activar(c) { cs.forEach(function (x) { x.classList.toggle("activa", x === c); x.setAttribute("aria-expanded", x === c ? "true" : "false"); }); }
+      cs.forEach(function (c) {
+        c.addEventListener("mouseenter", function () { if (FINO) activar(c); });
+        c.addEventListener("focus", function () { activar(c); });
+        c.addEventListener("click", function () { activar(c); });
+      });
+      activar(grupo.querySelector(".exp.activa") || cs[0]);
+    });
+  });
+
+  // Texto que se ilumina palabra por palabra mientras cruza la pantalla
+  seguro("leer", function () {
+    if (QUIETO) return;
+    [].forEach.call(document.querySelectorAll("[data-fx-leer]"), function (el) {
+      var dest = (el.getAttribute("data-destacar") || "").split("|").filter(Boolean);
+      var n = partir(el, "fx-w"), ws = [].slice.call(el.querySelectorAll(".fx-w")), raf = 0, prev = -1;
+      ws.forEach(function (w) { if (dest.some(function (d) { return w.textContent.indexOf(d) === 0; })) w.classList.add("dest"); });
+      el.classList.add("leer-on");
+      function pintar() {
+        raf = 0;
+        var r = el.getBoundingClientRect(), H = innerHeight;
+        var p = lim((H * .85 - r.top) / (H * .55), 0, 1), k = Math.round(p * n);
+        if (k === prev) return; prev = k;
+        ws.forEach(function (w, i) { w.classList.toggle("on", i < k); });
+      }
+      addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
+      pintar();
+    });
+  });
+
+  // Zoom reveal: la foto se abre desde un recorte y se aleja mientras entra en pantalla
+  seguro("zoom", function () {
+    if (QUIETO) return;
+    var figs = [].slice.call(document.querySelectorAll("[data-fx-zoom]")), raf = 0;
+    if (!figs.length) return;
+    function pintar() {
+      raf = 0; var H = innerHeight;
+      figs.forEach(function (f) {
+        var r = f.getBoundingClientRect(); if (r.top > H || r.bottom < 0) return;
+        var p = lim((H - r.top) / (H * .6), 0, 1), e = 1 - Math.pow(1 - p, 3), img = f.querySelector("img");
+        var c = ((1 - e) * 16).toFixed(2);
+        img.style.clipPath = "inset(" + c + "% " + c + "% " + c + "% " + c + "% round " + Math.round((1 - e) * 40) + "px)";
+        img.style.transform = "scale(" + (1.28 - e * .28).toFixed(4) + ")";
+      });
+    }
+    addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(pintar); }, { passive: true });
+    addEventListener("resize", pintar); pintar();
+  });
+
   // Cascada al entrar cada bloque .revela en pantalla (una sola vez)
   seguro("cascada", function () {
     if (!("IntersectionObserver" in window) || !window.Fx) return;
