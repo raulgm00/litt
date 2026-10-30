@@ -37,7 +37,7 @@
   <!-- HERO -->
   <section class="hero" data-fx-cine>
     <div class="hero-foto hero-foto--der" aria-hidden="true">
-      <video id="heroVideo" autoplay muted loop playsinline preload="none" poster="img/hero.webp" data-src="img/hero-mariachi.mp4"></video>
+      <video id="heroVideo" autoplay muted loop playsinline preload="none" poster="img/hero-mariachi-inicio.webp" data-src="img/hero-mariachi.mp4"></video>
       <img src="img/hero-mariachi.webp" alt="" width="1536" height="864">
     </div>
     <div class="envoltura hero-grid">
@@ -88,22 +88,27 @@
       <span class="eyebrow">Territorio de referencia</span>
       <h2>Cocula ya tiene identidad; falta <span class="acento">fundamentarla y articularla</span></h2>
       <p class="leer" data-fx-leer data-destacar="piloto|LITT">El Plan Municipal 2025–2027 pide un Plan de Desarrollo Turístico participativo que defina vocaciones territoriales y rutas prioritarias. El piloto de LITT responde justo a eso.</p>
-      <div class="rejilla r4" data-fx="spot" data-fx-profundidad style="margin-top:32px">
-        <div class="tarjeta cifra fx-spot-item fx-item"><b>2023</b><p>Año en que Cocula fue nombrado Pueblo Mágico.</p><span class="fuente">El Economista, oct-2025</span></div>
-        <div class="tarjeta cifra fx-spot-item fx-item"><b>+<span data-fx-contador>20</span><small>%</small></b><p>Crecimiento de la afluencia turística tras el nombramiento.</p><span class="fuente">El Economista, oct-2025</span></div>
-        <div class="tarjeta cifra fx-spot-item fx-item"><b><span data-fx-contador>1</span><small>h</small></b><p>De Guadalajara por carretera. La mayoría de visitas son de un día.</p><span class="fuente">Visit Jalisco</span></div>
-        <div class="tarjeta cifra fx-spot-item fx-item"><b><span data-fx-contador>6</span></b><p>Templos antiguos que recorren los peregrinos en Las Enramadas.</p><span class="fuente">Visit Jalisco</span></div>
+    </div>
+  </section>
+
+  <!-- COCULA EN CIFRAS · túnel de perspectiva (mismo efecto que las cinco hélices) -->
+  <section class="tunel" id="cocula-datos" aria-labelledby="coculaDatosTit">
+    <div class="tunel__pin">
+      <span class="tunel__aro tunel__aro--1" aria-hidden="true"></span>
+      <span class="tunel__aro tunel__aro--2" aria-hidden="true"></span>
+      <div class="tunel__titulo">
+        <span class="eyebrow">Cocula en cifras</span>
+        <h2 id="coculaDatosTit">Lo que ya sabemos <span class="acento">y lo que falta saber</span></h2>
+        <p class="sub">Datos públicos del destino: el punto de partida del piloto.</p>
       </div>
-      <div class="rejilla r2" data-fx-profundidad style="margin-top:18px">
-        <div class="tarjeta">
-          <h3>Activos ya documentados</h3>
-          <p>Cuna Mundial del Mariachi (patrimonio inmaterial reconocido por la UNESCO), Museo de Sitio «Cocula es el Mariachi», Escuela de Mariachi, «Al Son de Cocula» los domingos, presa Casa Blanca, Cerro de la Cruz, ex haciendas La Sauceda, San Diego y Cofradía de la Luz, birria, «ponte duro» y coyules enmielados.</p>
-        </div>
-        <div class="tarjeta">
-          <h3>Lo que aún no está claro</h3>
-          <p>El mayor flujo son paisanos de EE. UU. y Canadá; el turismo internacional es bajo y la economía depende de picos (fiestas de septiembre y diciembre). ¿Qué cadena de valor hay detrás de cada activo? ¿Qué buscan los visitantes y no encuentran? Ahí entran los datos.</p>
-        </div>
-      </div>
+      <ul class="tunel__cards">
+        <li class="tcard tcard--cifra"><span class="big">2023</span><p>Año en que Cocula fue nombrado Pueblo Mágico.</p><span class="fuente">El Economista, oct-2025</span></li>
+        <li class="tcard tcard--cifra"><span class="big">+<span data-fx-contador>20</span><small>%</small></span><p>Crecimiento de la afluencia turística tras el nombramiento.</p><span class="fuente">El Economista, oct-2025</span></li>
+        <li class="tcard tcard--cifra"><span class="big"><span data-fx-contador>1</span><small>h</small></span><p>De Guadalajara por carretera. La mayoría de visitas son de un día.</p><span class="fuente">Visit Jalisco</span></li>
+        <li class="tcard tcard--cifra"><span class="big"><span data-fx-contador>6</span></span><p>Templos antiguos que recorren los peregrinos en Las Enramadas.</p><span class="fuente">Visit Jalisco</span></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><h3>Activos ya documentados</h3><p>Cuna Mundial del Mariachi (patrimonio inmaterial reconocido por la UNESCO), Museo de Sitio «Cocula es el Mariachi», Escuela de Mariachi, «Al Son de Cocula» los domingos, presa Casa Blanca, Cerro de la Cruz, ex haciendas La Sauceda, San Diego y Cofradía de la Luz, birria, «ponte duro» y coyules enmielados.</p></li>
+        <li class="tcard tcard--meta"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v3M11 14h.01"/></svg></span><h3>Lo que aún no está claro</h3><p>El mayor flujo son paisanos de EE. UU. y Canadá; el turismo internacional es bajo y la economía depende de picos (fiestas de septiembre y diciembre). ¿Qué cadena de valor hay detrás de cada activo? ¿Qué buscan los visitantes y no encuentran? Ahí entran los datos.</p></li>
+      </ul>
     </div>
   </section>
 
