@@ -1,0 +1,80 @@
+/* =============================================================================
+   Efectos "web cara" · CSS opt-in (skill web-premium). Cada efecto se activa con una clase
+   o un data-atributo y se apaga solo con reduced-motion. Ver references/catalogo-efectos.md
+   Origen: panel/vendedores RuflesTv (XU) y Portal Clínico ISSSTE (PC), generalizados.
+   ============================================================================= */
+
+/* ---- 1. Crossfade entre páginas (entre documentos) ---- */
+@view-transition { navigation: auto; }
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+/* Elemento compartido: Fx.compartido() pone el nombre; aquí se da el ritmo */
+::view-transition-group(fx-compartido){animation-duration:420ms;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+::view-transition-old(fx-compartido),::view-transition-new(fx-compartido){height:100%;width:auto}
+
+/* ---- 2. Foco por desenfoque de hermanos (KPIs, tarjetas, cifras) · class="fx-blur" en el contenedor ---- */
+@media (hover:hover) and (pointer:fine){
+  .fx-blur>*{transition:filter .22s ease,opacity .22s ease,transform .22s ease}
+  .fx-blur:has(>:hover)>:not(:hover){filter:blur(4px);opacity:.55}
+  .fx-blur>:hover{transform:translateY(-2px)}
+}
+
+/* ---- 3. Fila con foco en tablas · class="fx-filas" en la <table> ----
+   La fila señalada crece un poco y se eleva; las demás se atenúan con un desenfoque leve.
+   Desenfoque bajo (1px) a propósito: la tabla debe seguir leyéndose. */
+@media (hover:hover) and (pointer:fine){
+  .fx-filas tbody tr{transition:filter .2s ease,opacity .2s ease,transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;transform-origin:50% 50%}
+  .fx-filas tbody:has(tr:hover) tr:not(:hover){filter:blur(1px);opacity:.5}
+  .fx-filas tbody tr:hover{transform:scale(1.015);box-shadow:0 10px 28px rgba(2,6,23,.22);position:relative;z-index:1}
+}
+/* Teclado: la fila con foco se resalta sin atenuar a las demás */
+.fx-filas tbody tr:focus-within{outline:2px solid var(--fx-foco,#22d3ee);outline-offset:-2px}
+
+/* ---- 4. Dock (magnificación) · data-fx="dock" en la lista; cada hijo recibe --dock (0..1) ---- */
+@media (hover:hover) and (pointer:fine){
+  [data-fx="dock"]>* svg,[data-fx="dock"]>* .fx-dock-ico{transform:scale(calc(1 + .5*var(--dock,0)));transition:transform .14s ease-out;will-change:transform}
+}
+
+/* ---- 5. Spotlight con borde iluminado · data-fx="spot" en la rejilla; los hijos llevan class="fx-spot-item" ---- */
+.fx-spot-item{position:relative;isolation:isolate}
+.fx-spot-item::before{content:"";position:absolute;inset:-1px;border-radius:inherit;z-index:-1;opacity:0;transition:opacity .3s;pointer-events:none;padding:1px;
+  background:radial-gradient(220px circle at var(--x,50%) var(--y,50%),var(--fx-spot,rgba(34,211,238,.85)),transparent 60%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+@media (hover:hover) and (pointer:fine){[data-fx="spot"]:hover .fx-spot-item::before{opacity:1}}
+
+/* ---- 6. Entrada en cascada · Fx.entrada(contenedor) agrega .fx-entrando y --i a cada .fx-item ---- */
+.fx-entrando .fx-item{animation:fx-tarjeta .5s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 45ms)}
+.fx-entrando .fx-item>*{animation:fx-contenido .42s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 45ms + 170ms)}
+@keyframes fx-tarjeta{from{opacity:0;transform:translateY(12px) scale(.985)}}
+@keyframes fx-contenido{from{opacity:0;filter:blur(6px)}}
+
+/* ---- 7. Borde que gira (UNO por página: el formulario o el CTA principal) · class="fx-borde-giro" ---- */
+@property --fx-ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.fx-borde-giro{border:1.5px solid transparent;
+  background:linear-gradient(var(--fx-fondo,#0f172a),var(--fx-fondo,#0f172a)) padding-box,
+    conic-gradient(from var(--fx-ang),rgba(255,255,255,.08) 0 60%,var(--fx-giro-1,#a5f3fc) 74%,var(--fx-giro-2,#6366f1) 84%,rgba(255,255,255,.08) 96%) border-box;
+  animation:fx-giro 7s linear infinite}
+@keyframes fx-giro{to{--fx-ang:360deg}}
+
+/* ---- 8. Empuje de fondo al abrir un panel (drawer/modal) · Fx.empujar(app, true|false) ---- */
+.fx-empujable{transition:transform .5s cubic-bezier(.22,1,.36,1),border-radius .5s,filter .5s;transform-origin:50% 50%}
+.fx-empujado{transform:translateX(-2rem) scale(.97);border-radius:18px;overflow:hidden;filter:brightness(.8)}
+.fx-velo{position:fixed;inset:0;z-index:50;background:rgba(2,6,23,.25);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.fx-velo.on{opacity:1;pointer-events:auto}
+
+/* ---- Esqueleto "tipo Supabase" (Fx.paginar con op.esqueleto): barras con brillo del color del texto ---- */
+.fx-sk{display:block;height:10px;border-radius:6px;background-color:color-mix(in srgb,currentColor 11%,transparent);
+  background-image:linear-gradient(90deg,transparent 0%,color-mix(in srgb,currentColor 16%,transparent) 50%,transparent 100%);
+  background-size:200% 100%;background-repeat:no-repeat;animation:fx-sk-brillo 1.1s linear infinite}
+@keyframes fx-sk-brillo{from{background-position:150% 0}to{background-position:-50% 0}}
+.fx-sk-fila{pointer-events:none}
+
+/* ---- Movimiento reducido: todo quieto; iteration-count:1 porque .01ms "infinite" sigue repitiéndose ---- */
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+  .fx-blur>*,.fx-filas tbody tr,.fx-empujable{transition:none!important}
+  .fx-filas tbody tr:hover,.fx-blur>:hover{transform:none!important}
+  .fx-entrando .fx-item,.fx-entrando .fx-item>*,.fx-borde-giro{animation:none!important}
+  [data-fx="dock"]>* svg,[data-fx="dock"]>* .fx-dock-ico{transform:none!important}
+  .fx-empujado{transform:none}
+  .fx-sk{animation:none}
+}
