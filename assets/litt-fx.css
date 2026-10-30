@@ -220,17 +220,16 @@ section.tunel{position:relative;padding:72px 0}
 /* Hero estilo Toucan (propuesta): el sujeto vive a la derecha; en móvil no se corta */
 .hero-foto--der img,.hero-foto--der video{object-position:84% 50%}
 
-/* Botón de sonido del hero (vidrio, igual que .btn-vidrio) con ecualizador que baila al sonar */
-.sonido{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:16px;padding:0 18px 0 14px;border-radius:999px;
-  font:500 14px/1 Inter,system-ui,sans-serif;color:var(--ink);background:rgba(32,24,18,.55);border:1px solid var(--glass-borde);cursor:pointer;
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.sonido:hover{background:rgba(239,192,97,.12)}
-.sonido:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
-.sonido i{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
-.sonido i b{display:block;width:3px;height:5px;border-radius:2px;background:var(--oro)}
-.sonido i b:nth-child(2){height:10px}.sonido i b:nth-child(3){height:7px}
-.sonido.on{border-color:rgba(239,192,97,.55)}
-.sonido.on i b{animation:fx-eq .9s ease-in-out infinite alternate}
-.sonido.on i b:nth-child(2){animation-delay:-.3s}.sonido.on i b:nth-child(3){animation-delay:-.6s}
+/* Música del hero: icono discreto en la esquina (solo para silenciar o reactivar); ecualizador que baila al sonar */
+.musica{position:absolute;right:16px;bottom:44px;z-index:2;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;cursor:pointer;
+  color:var(--ink);background:rgba(32,24,18,.55);border:1px solid var(--glass-borde);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.musica:hover{background:rgba(239,192,97,.14)}
+.musica:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+.musica i{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
+.musica i b{display:block;width:3px;height:3px;border-radius:2px;background:var(--ink-2)}
+.musica:not(.on)::after{content:"";position:absolute;width:22px;height:2px;background:var(--ink-2);transform:rotate(-45deg);border-radius:2px}
+.musica.on{border-color:rgba(239,192,97,.55)}
+.musica.on i b{background:var(--oro);animation:fx-eq .9s ease-in-out infinite alternate}
+.musica.on i b:nth-child(2){animation-delay:-.3s}.musica.on i b:nth-child(3){animation-delay:-.6s}
 @keyframes fx-eq{from{height:3px}to{height:14px}}
-@media (prefers-reduced-motion:reduce){.sonido.on i b{animation:none}}
+@media (prefers-reduced-motion:reduce){.musica.on i b{animation:none;height:10px}}

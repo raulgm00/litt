@@ -18,28 +18,40 @@
     var ahorro = navigator.connection && navigator.connection.saveData;
     if (QUIETO || ahorro) { v.remove(); return; }
     v.addEventListener("canplay", function () { v.classList.add("listo"); v.play().catch(function () {}); }, { once: true });
-    // Estilo Toucan: se reproduce una vez y se funde con la foto de abajo, que es su último cuadro en alta resolución
-    if (v.hasAttribute("data-una-vez")) v.addEventListener("ended", function () { v.classList.remove("listo"); });
     v.addEventListener("error", function () { v.remove(); }, { once: true });
     v.src = v.getAttribute("data-src") || "img/hero-loop.mp4";
   });
 
-  // Botón de sonido del hero: el navegador no deja sonar solo, así que la música arranca al tocarlo.
-  // Con data-reinicia vuelve a correr el video desde el inicio para que la música y la imagen vayan juntas.
-  seguro("sonido", function () {
-    [].forEach.call(document.querySelectorAll("[data-fx-sonido]"), function (btn) {
-      var a = new Audio(), txt = btn.querySelector("span"), base = btn.getAttribute("data-texto"), sonando = false;
-      a.preload = "none"; a.src = btn.getAttribute("data-fx-sonido");
-      function pon(on) { sonando = on; btn.setAttribute("aria-pressed", on ? "true" : "false"); btn.classList.toggle("on", on); txt.textContent = on ? "Pausar la música" : base; }
-      btn.addEventListener("click", function () {
-        if (sonando) { a.pause(); pon(false); return; }
-        var v = document.getElementById("heroVideo");
-        a.currentTime = 0;
-        if (v && v.isConnected && btn.hasAttribute("data-reinicia")) { try { v.currentTime = 0; v.classList.add("listo"); v.play().catch(function () {}); } catch (_) {} }
-        pon(true); a.play().catch(function () { pon(false); });
-      });
-      a.addEventListener("ended", function () { pon(false); });
-    });
+  // Música de fondo en bucle. Los navegadores no dejan sonar una página sin un gesto del visitante:
+  // se intenta al cargar y, si lo bloquean, arranca con el primer clic, toque o tecla en cualquier parte.
+  // data-fx-musica="video" = la pista va dentro del video del hero (sincronía perfecta en cada vuelta);
+  // si no hay video (movimiento reducido o ahorro de datos) se usa data-alt. El icono solo sirve para silenciar.
+  seguro("musica", function () {
+    var ctl = document.querySelector("[data-fx-musica]"); if (!ctl) return;
+    var modo = ctl.getAttribute("data-fx-musica"), v = document.getElementById("heroVideo"), a = null, on = false, callada = false;
+    var GESTOS = ["pointerdown", "keydown", "touchend"];
+    function fuente() {
+      if (modo === "video" && v && v.isConnected) return v;
+      if (!a) { var s = modo === "video" ? ctl.getAttribute("data-alt") : modo; if (!s) return null; a = new Audio(s); a.loop = true; a.volume = .75; }
+      return a;
+    }
+    function pintar() { ctl.classList.toggle("on", on); ctl.setAttribute("aria-pressed", on ? "true" : "false"); ctl.setAttribute("aria-label", on ? "Silenciar la música" : "Activar la música"); }
+    function sonar(si) {
+      var f = fuente(); if (!f) return;
+      if (f === v) {
+        v.muted = !si; on = si; pintar();
+        if (si) v.play().catch(function () { v.muted = true; on = false; pintar(); v.play().catch(function () {}); });
+      } else if (si) { f.play().then(function () { on = true; pintar(); }).catch(function () { on = false; pintar(); }); }
+      else { f.pause(); on = false; pintar(); }
+    }
+    function primero(e) { if (ctl.contains(e.target)) return; soltar(); if (!callada) sonar(true); }
+    function soltar() { GESTOS.forEach(function (t) { removeEventListener(t, primero, true); }); }
+    GESTOS.forEach(function (t) { addEventListener(t, primero, true); });
+    ctl.addEventListener("click", function () { soltar(); callada = on; sonar(!on); });
+    pintar();
+    // intento sin gesto (Chrome lo permite en sitios que el visitante ya frecuenta)
+    if (modo !== "video") { var f = fuente(); if (f) f.play().then(function () { on = true; pintar(); soltar(); }).catch(function () {}); }
+    else if (v && v.isConnected) v.addEventListener("playing", function () { if (!v.muted) { on = true; pintar(); soltar(); } }, { once: true });
   });
 
   // Túnel de perspectiva: cada tarjeta viaja en Z durante su tramo del scroll, en ángulo dorado
