@@ -260,3 +260,13 @@ section.tunel{position:relative;padding:72px 0}
 .toucan-on.llego .hero-texto>:nth-child(4){transition-delay:.75s}
 .toucan-on.llego .desliza,.toucan-on.llego .musica,.toucan-on.llego .credito-ia{transition-delay:1.2s}
 
+
+/* Mini video por fase del Método: en el lado de la línea opuesto al texto (zigzag) */
+.tl-clip{position:absolute;left:22px;width:260px;aspect-ratio:16/9;object-fit:cover;border-radius:14px;
+  border:1px solid rgba(239,192,97,.28);background:#140f0b;box-shadow:0 14px 34px rgba(0,0,0,.35);
+  opacity:0;transform:translateY(12px) scale(.96);transition:opacity .6s .3s,transform .8s cubic-bezier(.2,.85,.25,1) .3s}
+.tl-hito.up .tl-clip{top:calc(50% + 20px)}
+.tl-hito.dn .tl-clip{bottom:calc(50% + 20px)}
+.tl-hito.on .tl-clip{opacity:1;transform:none}
+@media (max-width:760px){.tl-clip{left:16px;width:200px}}
+.sin-tl .tl-clip{position:static;display:block;width:100%;max-width:420px;margin:0 0 12px;opacity:1;transform:none;transition:none}

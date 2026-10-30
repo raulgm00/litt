@@ -153,6 +153,22 @@
     });
   });
 
+  // Mini videos de las fases: se descargan y reproducen solo mientras están a la vista (la pista
+  // horizontal saca de pantalla a los demás); con movimiento reducido o ahorro de datos queda el póster.
+  seguro("clipsFase", function () {
+    var clips = [].slice.call(document.querySelectorAll("video.tl-clip[data-src]"));
+    var ahorro = navigator.connection && navigator.connection.saveData;
+    if (!clips.length || QUIETO || ahorro || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { if (!v.src) v.src = v.getAttribute("data-src"); v.play().catch(function () {}); }
+        else if (!v.paused) v.pause();
+      });
+    }, { threshold: .35 });
+    clips.forEach(function (v) { io.observe(v); });
+  });
+
   // Parte un texto en palabras (conserva los <span class="acento"> y sus clases en cada palabra)
   function partir(el, clase) {
     var i = 0, frag = document.createDocumentFragment();
