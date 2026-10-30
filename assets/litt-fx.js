@@ -17,6 +17,8 @@
     var v = document.getElementById("heroVideo"); if (!v) return;
     var ahorro = navigator.connection && navigator.connection.saveData;
     if (QUIETO || ahorro) { v.remove(); return; }
+    // Con data-tras-intro solo se precarga: lo arranca el bloque «toucan» cuando termina la llegada
+    if (v.hasAttribute("data-tras-intro")) { v.preload = "auto"; v.addEventListener("error", function () { v.remove(); }, { once: true }); v.src = v.getAttribute("data-src"); return; }
     v.addEventListener("canplay", function () { v.classList.add("listo"); v.play().catch(function () {}); }, { once: true });
     v.addEventListener("error", function () { v.remove(); }, { once: true });
     v.src = v.getAttribute("data-src") || "img/hero-loop.mp4";
@@ -44,14 +46,20 @@
       } else if (si) { f.play().then(function () { on = true; pintar(); }).catch(function () { on = false; pintar(); }); }
       else { f.pause(); on = false; pintar(); }
     }
-    function primero(e) { if (ctl.contains(e.target)) return; soltar(); if (!callada) sonar(true); }
+    // data-esperar-llegada: en el hero Toucan la Diana estalla justo cuando la cámara llega al mariachi
+    var esperar = ctl.hasAttribute("data-esperar-llegada") && !document.querySelector(".hero.llego"), pendiente = false;
+    function primero(e) { if (ctl.contains(e.target)) return; soltar(); if (callada) return; if (esperar) pendiente = true; else sonar(true); }
     function soltar() { GESTOS.forEach(function (t) { removeEventListener(t, primero, true); }); }
     GESTOS.forEach(function (t) { addEventListener(t, primero, true); });
-    ctl.addEventListener("click", function () { soltar(); callada = on; sonar(!on); });
+    ctl.addEventListener("click", function () { soltar(); esperar = false; pendiente = false; callada = on; sonar(!on); });
     pintar();
     // intento sin gesto (Chrome lo permite en sitios que el visitante ya frecuenta)
-    if (modo !== "video") { var f = fuente(); if (f) f.play().then(function () { on = true; pintar(); soltar(); }).catch(function () {}); }
-    else if (v && v.isConnected) v.addEventListener("playing", function () { if (!v.muted) { on = true; pintar(); soltar(); } }, { once: true });
+    function intentar() {
+      if (modo !== "video") { var f = fuente(); if (f) f.play().then(function () { on = true; pintar(); soltar(); }).catch(function () {}); }
+      else if (v && v.isConnected) v.addEventListener("playing", function () { if (!v.muted) { on = true; pintar(); soltar(); } }, { once: true });
+    }
+    if (esperar) addEventListener("litt:llego", function () { esperar = false; if (callada) return; if (pendiente) sonar(true); else intentar(); }, { once: true });
+    else intentar();
   });
 
   // Túnel de perspectiva: cada tarjeta viaja en Z durante su tramo del scroll, en ángulo dorado
@@ -165,9 +173,38 @@
     if (QUIETO) return;
     [].forEach.call(document.querySelectorAll("[data-fx-palabras]"), function (el) {
       el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
-      partir(el, "fx-palabra"); el.classList.add("fx-palabras-on");
+      partir(el, "fx-palabra");
+      // en un hero estilo Toucan el titular entra cuando la cámara llega (lo dispara el bloque «toucan»)
+      if (!el.closest(".hero[data-fx-toucan]")) el.classList.add("fx-palabras-on");
       [].forEach.call(el.children, function (c) { c.setAttribute("aria-hidden", "true"); });
     });
+  });
+
+  // Hero estilo Toucan (Scrolltide): la llegada corre sin nada encima; al aterrizar la página «nace»
+  // (clase .llego + evento litt:llego para la música) y el video de llegada cede al bucle del solo,
+  // que empieza en el mismo cuadro, así que el relevo no se nota. Sin video o con movimiento reducido: todo visible.
+  seguro("toucan", function () {
+    var hero = document.querySelector(".hero[data-fx-toucan]"); if (!hero) return;
+    var intro = document.getElementById("heroIntro"), solo = document.getElementById("heroVideo"), hecho = false;
+    var ahorro = navigator.connection && navigator.connection.saveData;
+    function llegar() {
+      if (hecho) return; hecho = true; hero.classList.add("llego");
+      [].forEach.call(hero.querySelectorAll("[data-fx-palabras]"), function (el) { el.classList.add("fx-palabras-on"); });
+      try { dispatchEvent(new Event("litt:llego")); } catch (_) {}
+    }
+    function relevo() {
+      llegar();
+      if (solo && solo.isConnected) { try { solo.currentTime = 0; } catch (_) {} solo.classList.add("listo"); solo.play().catch(function () {}); }
+      if (intro && intro.isConnected) setTimeout(function () { intro.classList.remove("listo"); }, 120);
+    }
+    if (QUIETO || ahorro || !intro) { if (intro) intro.remove(); llegar(); return; }
+    hero.classList.add("toucan-on");
+    intro.addEventListener("canplay", function () { if (hecho) { intro.remove(); return; } intro.classList.add("listo"); intro.play().catch(relevo); }, { once: true });
+    intro.addEventListener("timeupdate", function () { if (intro.duration && intro.currentTime > intro.duration - .8) llegar(); });
+    intro.addEventListener("ended", relevo, { once: true });
+    intro.addEventListener("error", function () { intro.remove(); relevo(); }, { once: true });
+    setTimeout(function () { if (!hecho && intro.readyState < 2) relevo(); }, 4000); // red lenta: no dejar la página vacía
+    intro.src = intro.getAttribute("data-src");
   });
 
   // Portada que se vuelve marco de cine: la foto se recorta con esquinas redondas y el texto sube

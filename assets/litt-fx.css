@@ -238,3 +238,45 @@ section.tunel{position:relative;padding:72px 0}
 .tcard--cifra .big small{font-size:.5em;color:var(--oro);margin-left:2px}
 .tcard .fuente{display:block;margin-top:10px;font-size:.8rem;color:var(--ink-3)}
 .tcard--cifra .big{color:var(--ink)}
+
+/* ===== Hero estilo Toucan (Scrolltide) · propuesta ===== */
+.hero[data-fx-toucan] .hero-foto video{transition:opacity .6s}
+/* palabra gigante y tenue detrás de la escena (pseudo-elemento: no es texto de la página) */
+.hero[data-fx-toucan] .hero-foto::before{content:"MARIACHI";position:absolute;left:50%;top:7%;z-index:1;transform:translateX(-50%);
+  font:700 clamp(5rem,15vw,15rem)/1 Fraunces,Georgia,serif;letter-spacing:.04em;white-space:nowrap;pointer-events:none;
+  color:rgba(246,239,230,.07);transition:opacity 1.4s .3s,transform 1.6s .3s cubic-bezier(.2,.8,.2,1)}
+.hero[data-fx-toucan] .hero-foto::after{z-index:2}
+/* velo más ligero que en el index: el video manda, el texto conserva su zona oscura a la izquierda */
+.hero[data-fx-toucan] .hero-foto::after{background:
+  linear-gradient(90deg,rgba(13,10,8,.90) 0%,rgba(13,10,8,.74) 34%,rgba(13,10,8,.22) 60%,rgba(13,10,8,0) 78%),
+  linear-gradient(180deg,rgba(13,10,8,.30) 0%,transparent 26%,transparent 72%,var(--bg) 100%)}
+@media (max-width:760px){.hero[data-fx-toucan] .hero-foto::after{background:linear-gradient(180deg,rgba(13,10,8,.55) 0%,rgba(13,10,8,.86) 45%,var(--bg) 100%)}}
+
+/* mientras la cámara vuela: solo la escena */
+.toucan-on:not(.llego) .hero-foto::before{opacity:0;transform:translateX(-50%) translateY(30px)}
+.toucan-on .hero-foto::after{transition:opacity 1.2s}
+.toucan-on:not(.llego) .hero-foto::after{opacity:.25}
+.toucan-on .hero-texto>*,.toucan-on .hero-detalles .hdet,.toucan-on .desliza,.toucan-on .musica,.toucan-on .credito-ia{
+  transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.toucan-on:not(.llego) .hero-texto>*,.toucan-on:not(.llego) .hero-detalles .hdet,
+.toucan-on:not(.llego) .desliza,.toucan-on:not(.llego) .musica,.toucan-on:not(.llego) .credito-ia{opacity:0;transform:translateY(18px);pointer-events:none}
+.toucan-on.llego .hero-texto>:nth-child(1){transition-delay:.05s}
+.toucan-on.llego .hero-texto>:nth-child(3){transition-delay:.55s}
+.toucan-on.llego .hero-texto>:nth-child(4){transition-delay:.75s}
+.toucan-on.llego .hero-detalles .hdet:nth-child(1){transition-delay:.9s}
+.toucan-on.llego .hero-detalles .hdet:nth-child(2){transition-delay:1.05s}
+.toucan-on.llego .desliza,.toucan-on.llego .musica,.toucan-on.llego .credito-ia{transition-delay:1.2s}
+
+/* tarjetas con recortes del mismo mariachi (como el ojo y el ala del tucán) */
+.hero-detalles{position:absolute;right:max(24px,calc((100vw - 1180px)/2));bottom:96px;z-index:1;display:flex;gap:12px}
+.hdet{margin:0;width:176px;padding:10px 10px 14px;border-radius:18px;background:#efe2c4;color:#2a1d12;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.5)}
+.hdet__eti{display:block;font:600 10px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#6b5236;text-align:right;margin:2px 4px 8px}
+.hdet__img{display:block;height:112px;border-radius:12px;background:#2a1d12 url("../img/hero-mariachi.webp") no-repeat;background-size:520% auto}
+.hdet__img--trompeta{background-position:56% 47%}
+.hdet__img--sombrero{background-position:88% 20%}
+.hdet figcaption{padding:10px 4px 0}
+.hdet figcaption b{display:block;font:700 1.45rem/1.1 Fraunces,Georgia,serif;color:#2a1d12}
+.hdet figcaption span{display:block;margin-top:4px;font-size:.78rem;line-height:1.35;color:#4a3826}
+@media (max-width:1100px){.hero-detalles{display:none}}
+@media (prefers-reduced-motion:reduce){.hero[data-fx-toucan] .hero-foto::before{transition:none}}

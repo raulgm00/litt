@@ -34,11 +34,13 @@
 </header>
 
 <main id="inicio">
-  <!-- HERO -->
-  <section class="hero" data-fx-cine>
+  <!-- HERO · estilo Toucan (Scrolltide): la cámara vuela bajo el papel picado hasta el mariachi y,
+       al llegar, la página «nace» encima y estalla la Diana; después él sigue con su solo en bucle -->
+  <section class="hero" data-fx-cine data-fx-toucan>
     <div class="hero-foto hero-foto--der" aria-hidden="true">
-      <video id="heroVideo" autoplay muted loop playsinline preload="none" poster="img/hero-mariachi-inicio.webp" data-src="img/hero-mariachi.mp4"></video>
       <img src="img/hero-mariachi.webp" alt="" width="1536" height="864">
+      <video id="heroVideo" muted loop playsinline preload="none" poster="img/hero-mariachi.webp" data-src="img/mariachi-solo.mp4" data-tras-intro></video>
+      <video id="heroIntro" muted playsinline preload="auto" poster="img/hero-mariachi-inicio.webp" data-src="img/mariachi-intro.mp4"></video>
     </div>
     <div class="envoltura hero-grid">
       <div class="hero-texto">
@@ -51,8 +53,20 @@
         </div>
       </div>
     </div>
+    <div class="hero-detalles">
+      <figure class="hdet">
+        <span class="hdet__eti">Patrimonio</span>
+        <span class="hdet__img hdet__img--trompeta" role="img" aria-label="Detalle de la trompeta del mariachi"></span>
+        <figcaption><b>UNESCO 2011</b><span>El mariachi, patrimonio cultural inmaterial de la humanidad.</span></figcaption>
+      </figure>
+      <figure class="hdet">
+        <span class="hdet__eti">Afluencia</span>
+        <span class="hdet__img hdet__img--sombrero" role="img" aria-label="Detalle del sombrero bordado del mariachi"></span>
+        <figcaption><b>+20 %</b><span>Más visitantes desde que Cocula es Pueblo Mágico.</span></figcaption>
+      </figure>
+    </div>
     <a class="desliza" href="#reto">Desliza<i aria-hidden="true"></i></a>
-    <button class="musica" type="button" data-fx-musica="video" data-alt="audio/diana-jarabe.mp3" aria-pressed="false" aria-label="Activar la música"><i aria-hidden="true"><b></b><b></b><b></b></i></button>
+    <button class="musica" type="button" data-fx-musica="audio/diana-jarabe.mp3" data-esperar-llegada aria-pressed="false" aria-label="Activar la música"><i aria-hidden="true"><b></b><b></b><b></b></i></button>
     <p class="credito-ia">Imagen ilustrativa generada con IA</p>
   </section>
 
