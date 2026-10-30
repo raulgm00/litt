@@ -19,9 +19,27 @@
     if (QUIETO || ahorro) { v.remove(); return; }
     v.addEventListener("canplay", function () { v.classList.add("listo"); v.play().catch(function () {}); }, { once: true });
     // Estilo Toucan: se reproduce una vez y se funde con la foto de abajo, que es su último cuadro en alta resolución
-    if (v.hasAttribute("data-una-vez")) v.addEventListener("ended", function () { v.classList.remove("listo"); }, { once: true });
+    if (v.hasAttribute("data-una-vez")) v.addEventListener("ended", function () { v.classList.remove("listo"); });
     v.addEventListener("error", function () { v.remove(); }, { once: true });
     v.src = v.getAttribute("data-src") || "img/hero-loop.mp4";
+  });
+
+  // Botón de sonido del hero: el navegador no deja sonar solo, así que la música arranca al tocarlo.
+  // Con data-reinicia vuelve a correr el video desde el inicio para que la música y la imagen vayan juntas.
+  seguro("sonido", function () {
+    [].forEach.call(document.querySelectorAll("[data-fx-sonido]"), function (btn) {
+      var a = new Audio(), txt = btn.querySelector("span"), base = btn.getAttribute("data-texto"), sonando = false;
+      a.preload = "none"; a.src = btn.getAttribute("data-fx-sonido");
+      function pon(on) { sonando = on; btn.setAttribute("aria-pressed", on ? "true" : "false"); btn.classList.toggle("on", on); txt.textContent = on ? "Pausar la música" : base; }
+      btn.addEventListener("click", function () {
+        if (sonando) { a.pause(); pon(false); return; }
+        var v = document.getElementById("heroVideo");
+        a.currentTime = 0;
+        if (v && v.isConnected && btn.hasAttribute("data-reinicia")) { try { v.currentTime = 0; v.classList.add("listo"); v.play().catch(function () {}); } catch (_) {} }
+        pon(true); a.play().catch(function () { pon(false); });
+      });
+      a.addEventListener("ended", function () { pon(false); });
+    });
   });
 
   // Túnel de perspectiva: cada tarjeta viaja en Z durante su tramo del scroll, en ángulo dorado
