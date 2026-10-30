@@ -58,6 +58,100 @@ section.h-tl{position:relative;height:320vh;padding:0}
 .sin-tl .tl-hito{width:auto;height:auto;padding-left:30px}
 .sin-tl .tl-dot{top:8px;left:6px;margin:0;background:var(--oro)}
 .sin-tl .tl-txt{position:static;opacity:1;transform:none;width:auto;transition:none}
+/* ---- Túnel de perspectiva (receta RuflesTv): sin JS o con reduced-motion queda como rejilla ---- */
+.cita-sec{padding:72px 0 0}
+section.tunel{position:relative;padding:72px 0}
+.tunel__titulo{text-align:center;max-width:720px;margin:0 auto 32px;padding:0 20px}
+.tunel__titulo .sub{color:var(--ink-2);font-size:1.08rem;margin:14px auto 0;max-width:48ch}
+.tunel__cards{list-style:none;margin:0 auto;padding:0 20px;max-width:1160px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.tunel__cards{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.tunel__cards{grid-template-columns:1fr}}
+.tunel__aro{display:none}
+.tcard{border-radius:var(--radio);padding:24px;background:linear-gradient(180deg,#221a14,#140f0b);border:1px solid rgba(239,192,97,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 60px rgba(0,0,0,.6)}
+.tcard__ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(239,192,97,.12);color:var(--oro);margin-bottom:14px}
+.tcard__ico svg{width:23px;height:23px}
+.tcard .big{display:block;font:700 2.6rem/1 Fraunces,Georgia,serif;color:var(--oro);margin:2px 0 10px}
+.tcard h3{margin:0 0 6px;font-size:1.18rem}
+.tcard p{margin:0;color:var(--ink-2);font-size:.96rem;line-height:1.5}
+.tcard--meta{border-color:var(--oro);background:linear-gradient(180deg,#2c2114,#17110b)}
+.tunel--3d{height:380vh;padding:0!important}
+.tunel--3d .tunel__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1200px;display:flex;align-items:center;justify-content:center}
+.tunel--3d .tunel__pin::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(rgba(239,192,97,.10) 1px,transparent 1.2px) 0 0/28px 28px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 50%,transparent 100%);mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 50%,transparent 100%)}
+.tunel--3d .tunel__aro{display:block;position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%)}
+.tunel--3d .tunel__aro--1{width:48vmin;height:48vmin;border:1px solid rgba(239,192,97,.22)}
+.tunel--3d .tunel__aro--2{width:78vmin;height:78vmin;border:1px dashed rgba(224,138,99,.18)}
+.tunel--3d .tunel__titulo{position:relative;z-index:0;margin:0;will-change:transform,opacity}
+.tunel--3d .tunel__cards{position:absolute;inset:0;display:block;max-width:none;padding:0;transform-style:preserve-3d;pointer-events:none}
+.tunel--3d .tcard{position:absolute;left:50%;top:50%;width:var(--cw,260px);opacity:0;will-change:transform,opacity;backface-visibility:hidden}
+@media (max-width:767px){.tunel--3d .tunel__pin{perspective:900px}.tcard{padding:18px}.tcard p{font-size:.9rem}}
+
+/* ---- Carpeta de vidrio (receta RuflesTv «Kit de redes») ---- */
+.hoy-sec{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media (max-width:860px){.hoy-sec{grid-template-columns:1fr}}
+.hoy-txt{color:var(--ink-2);margin:14px 0 26px}
+.gf__zona{display:flex;flex-direction:column;align-items:center;padding-top:230px;--gf-ease:cubic-bezier(.2,.8,.2,1);--gf-spring:cubic-bezier(.34,1.36,.5,1)}
+.gf__ayuda{margin:18px 0 0;color:var(--ink-3);font-size:.84rem;text-align:center}
+.gf{position:relative;width:340px;height:272px;flex:none;--px:0;--py:0;--hinge:0deg;--lift:0px;--spread:70px;--fan:0deg;--esc:1;--stack:7px;-webkit-tap-highlight-color:transparent}
+.gf:hover,.gf:focus-within{--hinge:-11deg;--lift:-26px;--spread:78px;--fan:2.2deg;--stack:5px}
+.gf[data-open]{--hinge:-24deg;--lift:-190px;--spread:150px;--fan:5deg;--esc:1.12;--stack:0px}
+.gf__tilt{position:absolute;inset:0;transform:perspective(1400px) rotateX(calc(var(--py) * -3deg)) rotateY(calc(var(--px) * 4deg));transition:transform .9s var(--gf-ease)}
+.gf__sombra{position:absolute;left:8%;right:8%;bottom:-22px;height:44px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(239,192,97,.28),rgba(239,192,97,.07) 60%,transparent);transform:translateX(calc(var(--px) * -8px));transition:transform .9s var(--gf-ease),opacity .9s var(--gf-ease)}
+.gf__back{position:absolute;inset:0;overflow:hidden;
+  clip-path:path('M0 56A22 22 0 0 1 22 34L146 34C170 34 172 0 198 0L318 0A22 22 0 0 1 340 22L340 250A22 22 0 0 1 318 272L22 272A22 22 0 0 1 0 250Z');
+  background:radial-gradient(120% 90% at 82% 0%,rgba(239,192,97,.55),transparent 58%),radial-gradient(90% 70% at 10% 30%,rgba(224,138,99,.32),transparent 60%),linear-gradient(165deg,#3a2810,#1a1108 55%,#0d0a08)}
+.gf__back::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 24%)}
+.gf__rim{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;fill:none}
+.gf__rim--back{width:340px;height:272px}
+.gf__rim--back path{stroke:rgba(255,255,255,.16);stroke-width:1}
+.gf__hojas{position:absolute;inset:0;z-index:5;pointer-events:none;clip-path:inset(-640px -640px 10px -640px)}
+.gf__hoja{position:absolute;left:50%;top:26px;width:150px;min-height:186px;margin:0 0 0 -75px;padding:16px 14px;border-radius:14px;background:linear-gradient(180deg,#f6efe6,#e9dcc8);color:#1a120a;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 12px 28px -8px rgba(0,0,0,.75);transform-origin:50% 100%;
+  transform:translate(calc(var(--slot) * var(--spread)),calc(var(--lift) - var(--d) * var(--stack))) rotate(calc(var(--slot) * var(--fan))) scale(var(--esc));
+  transition:transform .75s var(--gf-spring) calc(var(--d) * 40ms),box-shadow .4s var(--gf-ease),translate .9s var(--gf-ease),opacity .9s var(--gf-ease)}
+.gf__hoja .hj-n{display:block;font:700 .72rem/1 Inter;letter-spacing:.14em;color:#8a4b22}
+.gf__hoja h3{font-size:1.02rem;line-height:1.15;margin:8px 0 6px;color:#1a120a}
+.gf__hoja p{margin:0;font-size:.8rem;line-height:1.4;color:#3d2e20}
+.gf[data-open] .gf__hoja{pointer-events:auto}
+.gf[data-open] .gf__hoja:hover{transform:translate(calc(var(--slot) * var(--spread)),calc(var(--lift) - 16px)) rotate(calc(var(--slot) * var(--fan) * .5)) scale(var(--esc));
+  box-shadow:inset 0 0 0 1px rgba(239,192,97,.8),0 26px 44px -12px rgba(0,0,0,.85),0 0 30px rgba(239,192,97,.22);transition-delay:0s}
+.gf__front{position:absolute;left:0;top:74px;width:340px;height:198px;z-index:10;
+  clip-path:path('M0 22A22 22 0 0 1 22 0L118 0C144 0 146 32 172 32L318 32A22 22 0 0 1 340 54L340 176A22 22 0 0 1 318 198L22 198A22 22 0 0 1 0 176Z');
+  background:rgba(20,15,11,.9);transform-origin:50% 100%;transform:perspective(760px) rotateX(var(--hinge));
+  transition:transform .8s var(--gf-spring),translate 1s var(--gf-ease),opacity 1s var(--gf-ease)}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){.gf__front{background:transparent;-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5)}}
+.gf__tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,11,.22) 0%,rgba(16,12,9,.66) 46%,rgba(10,8,6,.95) 100%)}
+.gf__spec{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.18;
+  background:radial-gradient(260px 200px at calc(50% + var(--px) * 46%) calc(30% + var(--py) * 40%),#fff,transparent 70%)}
+.gf__rim--front{width:340px;height:198px;opacity:.6}
+.gf__rim--front path{stroke-width:2.4}
+.gf__hit{all:unset;position:absolute;inset:0;z-index:1;cursor:pointer}
+.gf__hit:focus-visible~.gf__label .gf__titulo{text-decoration:underline;text-underline-offset:4px}
+.gf__label{position:absolute;z-index:2;left:26px;bottom:26px;display:flex;flex-direction:column;gap:4px;pointer-events:none}
+.gf__titulo{font:700 1.2rem/1.1 Fraunces,Georgia,serif;color:var(--ink)}
+.gf__meta{font-size:.8rem;color:var(--ink-2)}
+.gf__icono{position:absolute;z-index:2;right:22px;bottom:22px;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;pointer-events:none;color:#1a120a;
+  background:linear-gradient(135deg,var(--oro),var(--terracota));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 22px -6px rgba(239,192,97,.5);transition:transform .45s var(--gf-spring)}
+.gf__icono svg{width:24px;height:24px;transition:transform .45s var(--gf-spring)}
+.gf[data-open] .gf__icono svg{transform:rotate(45deg)}
+.gf--js:not([data-entrado]) .gf__back,.gf--js:not([data-entrado]) .gf__rim--back{translate:0 22px;opacity:0}
+.gf--js:not([data-entrado]) .gf__hoja{translate:0 -120px;opacity:0}
+.gf--js:not([data-entrado]) .gf__front{translate:0 46px;opacity:0}
+.gf--js:not([data-entrado]) .gf__sombra{opacity:0}
+.gf__back,.gf__rim--back{transition:translate 1s var(--gf-ease),opacity .9s var(--gf-ease)}
+.gf--js[data-entrado] .gf__hoja{transition-delay:calc(var(--d) * 40ms),0s,calc(.18s + var(--d) * 90ms),calc(.18s + var(--d) * 90ms)}
+.gf--js[data-entrado] .gf__front{transition-delay:0s,.42s,.42s}
+@media (max-width:520px){
+  .gf{transform:scale(.9)}
+  .gf[data-open]{--spread:104px;--fan:4deg;--esc:.98;--lift:-178px}
+  .gf__hoja{width:118px;margin-left:-59px;min-height:170px;padding:12px 10px}
+  .gf__hoja h3{font-size:.9rem}.gf__hoja p{font-size:.72rem}
+}
+@media (prefers-reduced-motion:reduce){.gf *,.gf{transition-duration:0s!important;transition-delay:0s!important}.gf__tilt{transform:none}}
+
 /* Pilares */
 .pilar h3{margin-top:2px}
 .ecuacion{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;font:600 15px/1.2 Inter;color:var(--ink-2)}
@@ -113,40 +207,32 @@ section.h-tl{position:relative;height:320vh;padding:0}
     <p class="credito-ia">Imagen ilustrativa generada con IA</p>
   </section>
 
-  <!-- QUÉ ES -->
-  <section id="que-es">
+  <!-- QUÉ ES · túnel de perspectiva (catálogo web-premium sección E · receta RuflesTv XU:1599) -->
+  <section class="cita-sec">
     <div class="envoltura">
-      <figure class="cita" style="margin:0 0 56px">
+      <figure class="cita" style="margin:0">
         <blockquote>«La visión de LITT es convertir la información turística en conocimiento útil para conectar a los actores del territorio, fortalecer la colaboración y generar desarrollo local.»</blockquote>
         <figcaption>Rosa María González Sánchez · impulsora de LITT</figcaption>
       </figure>
-      <span class="eyebrow">Qué es LITT</span>
-      <h2>Una iniciativa que une cuatro cosas que casi nunca <span class="acento">trabajan juntas</span></h2>
-      <div class="rejilla r4 revela" data-fx="spot" style="margin-top:32px">
-        <article class="tarjeta pilar fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <h3>Identidad territorial</h3>
-          <p>Los activos, la vocación y las capacidades que hacen único a cada lugar.</p>
-        </article>
-        <article class="tarjeta pilar fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
-          <h3>Tecnología</h3>
-          <p>Ciencia de datos, inteligencia artificial y agentes autónomos al servicio del territorio.</p>
-        </article>
-        <article class="tarjeta pilar fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg></div>
-          <h3>Conocimiento</h3>
-          <p>Datos analizados y hallazgos validados, no suposiciones.</p>
-        </article>
-        <article class="tarjeta pilar fx-spot-item fx-item">
-          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></div>
-          <h3>Actores estratégicos</h3>
-          <p>Universidades, gobierno, empresas, sociedad civil y medio ambiente: las cinco hélices.</p>
-        </article>
+    </div>
+  </section>
+  <section class="tunel" id="que-es" aria-labelledby="tunelTit">
+    <div class="tunel__pin">
+      <span class="tunel__aro tunel__aro--1" aria-hidden="true"></span>
+      <span class="tunel__aro tunel__aro--2" aria-hidden="true"></span>
+      <div class="tunel__titulo">
+        <span class="eyebrow">Qué es LITT</span>
+        <h2 id="tunelTit">Cuatro cosas que casi nunca <span class="acento">trabajan juntas</span></h2>
+        <p class="sub">Identidad, tecnología, conocimiento y actores, en un mismo laboratorio para cada territorio.</p>
       </div>
-      <div class="ecuacion" aria-label="Identidad más tecnología más conocimiento más actores igual a desarrollo económico local">
-        <span>Identidad</span><b>+</b><span>Tecnología</span><b>+</b><span>Conocimiento</span><b>+</b><span>Actores</span><b>=</b><span class="meta">Desarrollo económico local</span>
-      </div>
+      <ul class="tunel__cards">
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></span><h3>Identidad territorial</h3><p>Los activos, la vocación y las capacidades que hacen único a cada lugar.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h3>Tecnología</h3><p>Ciencia de datos, inteligencia artificial y agentes autónomos al servicio del territorio.</p></li>
+        <li class="tcard"><span class="big">5</span><h3>Hélices articuladas</h3><p>Academia, gobierno, empresa, sociedad civil y medio ambiente sobre la misma base.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg></span><h3>Conocimiento</h3><p>Datos analizados y hallazgos validados, no suposiciones.</p></li>
+        <li class="tcard"><span class="tcard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></span><h3>Actores estratégicos</h3><p>Universidades, instituciones públicas y empresas como aliados del territorio.</p></li>
+        <li class="tcard tcard--meta"><span class="big">=</span><h3>Desarrollo económico local</h3><p>Oportunidades que se quedan en la comunidad y respetan su identidad.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -191,24 +277,44 @@ section.h-tl{position:relative;height:320vh;padding:0}
     </div>
   </section>
 
-  <!-- HOY -->
+  <!-- HOY · carpeta de vidrio (receta RuflesTv «Kit de redes», XU:664 / carpeta()) -->
   <section id="hoy">
-    <div class="envoltura">
-      <span class="eyebrow">En qué está hoy</span>
-      <h2>Del modelo al territorio</h2>
-      <div class="rejilla r2" style="margin-top:32px">
-        <div class="tarjeta">
-          <h3>Etapa actual</h3>
-          <ul class="estado">
-            <li><strong>Desarrollar y validar</strong> el modelo de LITT.</li>
-            <li><strong>Avanzar hacia una prueba piloto</strong>, con Cocula, Jalisco, como territorio de referencia.</li>
-            <li><strong>Construir alianzas</strong> con universidades, instituciones públicas y empresas.</li>
-          </ul>
+    <div class="envoltura hoy-sec">
+      <div>
+        <span class="eyebrow">En qué está hoy</span>
+        <h2>Del modelo <span class="acento">al territorio</span></h2>
+        <p class="lead">Un modelo adaptable a distintas comunidades, donde cada territorio conserve su identidad y genere sus propias oportunidades económicas.</p>
+        <p class="hoy-txt">La inteligencia artificial y los agentes autónomos ayudan a convertir ideas en acciones, identificar oportunidades de colaboración y escalar el impacto.</p>
+        <a class="btn btn-oro" href="propuesta.html">Ver la propuesta de piloto →</a>
+      </div>
+      <div class="gf__zona">
+        <div class="gf" id="hoyGf" data-open>
+          <div class="gf__tilt">
+            <div class="gf__sombra" aria-hidden="true"></div>
+            <div class="gf__back" aria-hidden="true"></div>
+            <svg class="gf__rim gf__rim--back" viewBox="0 0 340 272" aria-hidden="true"><path d="M0 56A22 22 0 0 1 22 34L146 34C170 34 172 0 198 0L318 0A22 22 0 0 1 340 22L340 250A22 22 0 0 1 318 272L22 272A22 22 0 0 1 0 250Z"/></svg>
+            <div class="gf__hojas" role="list" aria-label="Los tres frentes de la etapa actual">
+              <article class="gf__hoja" role="listitem" style="--slot:-1;--d:2">
+                <span class="hj-n">01</span><h3>Validar el modelo</h3><p>Desarrollar y probar el modelo de LITT.</p>
+              </article>
+              <article class="gf__hoja" role="listitem" style="--slot:0;--d:1">
+                <span class="hj-n">02</span><h3>Prueba piloto</h3><p>Cocula, Jalisco, como territorio de referencia.</p>
+              </article>
+              <article class="gf__hoja" role="listitem" style="--slot:1;--d:0">
+                <span class="hj-n">03</span><h3>Alianzas</h3><p>Universidades, instituciones públicas y empresas.</p>
+              </article>
+            </div>
+            <div class="gf__front">
+              <div class="gf__tint" aria-hidden="true"></div>
+              <div class="gf__spec" aria-hidden="true"></div>
+              <svg class="gf__rim gf__rim--front" viewBox="0 0 340 198" aria-hidden="true"><defs><linearGradient id="gf-rim-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".35" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient></defs><path d="M0 22A22 22 0 0 1 22 0L118 0C144 0 146 32 172 32L318 32A22 22 0 0 1 340 54L340 176A22 22 0 0 1 318 198L22 198A22 22 0 0 1 0 176Z" stroke="url(#gf-rim-g)"/></svg>
+              <button type="button" class="gf__hit" aria-expanded="true" aria-label="Cerrar la etapa actual, 3 frentes"></button>
+              <div class="gf__label"><span class="gf__titulo">Etapa actual</span><span class="gf__meta">3 frentes de trabajo</span></div>
+              <span class="gf__icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </div>
+          </div>
         </div>
-        <div class="tarjeta">
-          <h3>Visión</h3>
-          <p>Un modelo adaptable a distintas comunidades, donde cada territorio conserve su identidad y genere sus propias oportunidades económicas. La inteligencia artificial y los agentes autónomos ayudan a convertir ideas en acciones, identificar oportunidades de colaboración y escalar el impacto.</p>
-        </div>
+        <p class="gf__ayuda">Toca la carpeta para abrirla.</p>
       </div>
     </div>
   </section>
@@ -247,6 +353,53 @@ section.h-tl{position:relative;height:320vh;padding:0}
   v.addEventListener('canplay',function(){v.classList.add('listo');v.play().catch(function(){});},{once:true});
   v.addEventListener('error',function(){v.remove();},{once:true});
   v.src='img/hero-loop.mp4';
+})();
+// Túnel de perspectiva: cada tarjeta viaja en Z durante su tramo del scroll, en ángulo dorado (receta RuflesTv)
+(function(){
+  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sec=document.getElementById('que-es'); if(!sec||quieto) return;
+  sec.classList.add('tunel--3d');
+  var pin=sec.querySelector('.tunel__pin'),tit=sec.querySelector('.tunel__titulo'),cards=[].slice.call(sec.querySelectorAll('.tcard')),n=cards.length,G=137.5*Math.PI/180;
+  var D=cards.map(function(c,i){return {c:c,cos:Math.cos(i*G),sin:Math.sin(i*G),rx:.27+(i%3)*.06,ry:.22+(i%2)*.07,rz:(i%2?-1:1)*(2+(i%5)*1.5)};});
+  var p=0,px=0,py=0,tx=0,ty=0,cw=0,raf=0;
+  var fino=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  function lim(v,a,b){return v<a?a:v>b?b:v;}
+  function pedir(){if(!raf)raf=requestAnimationFrame(pintar);}
+  if(fino)addEventListener('pointermove',function(e){tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;pedir();},{passive:true});
+  function pintar(){
+    raf=0;
+    var r=sec.getBoundingClientRect(),W=document.documentElement.clientWidth,H=innerHeight;
+    if(r.top>H||r.bottom<0) return;
+    var obj=lim(-r.top/Math.max(1,r.height-H),0,1);p+=(obj-p)*.22;px+=(tx-px)*.08;py+=(ty-py)*.08;
+    var mov=W<768,span=mov?.30:.52,paso=(1-span-.04)/Math.max(1,n-1),z0=mov?-900:-1700,z1=mov?40:500,par=mov?0:38;
+    var w=Math.round(mov?lim(W*.66,210,280):lim(W*.2,230,300));if(w!==cw){cw=w;pin.style.setProperty('--cw',w+'px');}
+    D.forEach(function(d,i){var y=lim((p-i*paso)/span,0,1),z=z0+(z1-z0)*y,c=mov?.74:.84,o=y<.16?y/.16:y>c?Math.max(0,1-(y-c)/(mov?.18:.14)):1;
+      var x=d.cos*W*(mov?.08:d.rx)-px*par,yy=d.sin*H*(mov?.2:d.ry)-py*par;
+      d.c.style.transform='translate3d(calc(-50% + '+x.toFixed(1)+'px),calc(-50% + '+yy.toFixed(1)+'px),'+z.toFixed(1)+'px) rotateZ('+d.rz+'deg)';d.c.style.opacity=o.toFixed(3);});
+    var to=p<.05?1:Math.max(.14,1-(p-.05)*4.2),fin=p>.94?Math.max(0,1-(p-.94)/.06):1;
+    tit.style.transform='scale('+(.86+.4*p).toFixed(3)+')';tit.style.opacity=(to*fin).toFixed(3);
+    if(Math.abs(obj-p)>.0004||Math.abs(tx-px)>.002||Math.abs(ty-py)>.002) pedir();
+  }
+  addEventListener('scroll',pedir,{passive:true});addEventListener('resize',pedir);pedir();
+})();
+// Carpeta de vidrio: sin JS o con reduced-motion queda abierta y quieta (receta RuflesTv carpeta())
+(function(){
+  var gf=document.getElementById('hoyGf'); if(!gf) return;
+  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches,fino=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  gf.classList.add('gf--js');
+  var hojas=gf.querySelector('.gf__hojas'),hit=gf.querySelector('.gf__hit');
+  function abierta(){return gf.hasAttribute('data-open');}
+  function abrir(v){gf.toggleAttribute('data-open',v);hit.setAttribute('aria-expanded',v?'true':'false');hit.setAttribute('aria-label',(v?'Cerrar':'Abrir')+' la etapa actual, 3 frentes');
+    if(v)hojas.removeAttribute('inert');else hojas.setAttribute('inert','');}
+  abrir(quieto);
+  hit.addEventListener('click',function(){abrir(!abierta());});
+  document.addEventListener('pointerdown',function(e){if(abierta()&&!gf.contains(e.target))abrir(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&abierta()){abrir(false);try{hit.focus({preventScroll:true});}catch(_){}}});
+  if(fino&&!quieto){var r=0,x=0,y=0;function pon(){r=0;gf.style.setProperty('--px',x.toFixed(3));gf.style.setProperty('--py',y.toFixed(3));}
+    gf.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;var b=gf.getBoundingClientRect();x=Math.max(-1.4,Math.min(1.4,(e.clientX-b.left)/b.width*2-1));y=Math.max(-1.4,Math.min(1.4,(e.clientY-b.top)/b.height*2-1));if(!r)r=requestAnimationFrame(pon);});
+    gf.addEventListener('pointerleave',function(){x=0;y=0;if(!r)r=requestAnimationFrame(pon);});}
+  if('IntersectionObserver' in window&&!quieto){var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting;})){io.disconnect();setTimeout(function(){gf.setAttribute('data-entrado','');},80);}},{threshold:.35});io.observe(gf);}
+  else gf.setAttribute('data-entrado','');
 })();
 // Timeline horizontal fijado: el avance vertical dentro de la sección mueve la pista (un solo rAF, solo transform)
 (function(){
